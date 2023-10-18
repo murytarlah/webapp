@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api")
-public class FunRestController {
+public class StudentController {
 
 	private List<Student> allStudents;
 
