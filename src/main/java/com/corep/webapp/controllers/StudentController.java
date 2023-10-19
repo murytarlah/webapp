@@ -2,12 +2,14 @@ package com.corep.webapp.controllers;
 
 import com.corep.webapp.enums.Status;
 import com.corep.webapp.dto.ApiResponse;
+import com.corep.webapp.exceptions.StudentNotFoundException;
 import com.corep.webapp.models.Student;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -33,6 +35,9 @@ public class StudentController {
 
 	@GetMapping("/students/{id}")
 	public ApiResponse<Student> getStudent(@PathVariable Integer id) {
+		if(id > allStudents.size() || id < 0){
+			throw new StudentNotFoundException("student with id not found "+ id);
+		}
 		return new ApiResponse<>("student data fetched successfully", Status.SUCCESS,allStudents.get(id));
 	}
 
